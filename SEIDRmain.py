@@ -310,7 +310,7 @@ class SEIDRSynchronousDynamics(GraphWithSynchronousDynamics):
     
     def __init__( self,household_size=0, community_size=0, number_of_communities=0,
                  beta = 0.0, gamma = 1.0, pInfected = 0.0, eta = 1.0, 
-                 delta = 0.0, epsilon = 1.0, zeta = 1.0, g = None, rewire_degree = 0):
+                 delta = 0.0, epsilon = 1.0, zeta = 1.0, g = None, rewire_degree = 0, pExposed = 0.0):
         '''Generate a graph with dynamics for the given parameters.
         
         beta: infection probability (defaults to 0.0)
@@ -324,6 +324,7 @@ class SEIDRSynchronousDynamics(GraphWithSynchronousDynamics):
         self._beta = beta
         self._gamma = gamma
         self._pInfected = pInfected
+	self._pExposed = pExposed
         self._eta = eta
         self._delta = delta
         self._epsilon = epsilon
@@ -331,7 +332,7 @@ class SEIDRSynchronousDynamics(GraphWithSynchronousDynamics):
         self._rewire_degree = rewire_degree
             
     def before( self ):
-        '''Seed the network with infected nodes, and mark all edges
+        '''Seed the network with infected and exposed nodes, and mark all edges
         as unoccupied by the dynamics.'''
         self._infected = []       # in case we re-run from a dirty intermediate state
         self._exposed = []
@@ -343,7 +344,11 @@ class SEIDRSynchronousDynamics(GraphWithSynchronousDynamics):
                 self._infected.insert(0, n)
                 self.node[n][self.DYNAMICAL_STATE] = self.INFECTED
             else:
-                self.node[n][self.DYNAMICAL_STATE] = self.SUSCEPTIBLE
+		if numpy.random.random() <= self._pExposed:
+			self._exposed.insert(0,n)
+			self.node[n][self.DYNAMIAL_STATE] = self.EXPOSED
+		else:
+                	self.node[n][self.DYNAMICAL_STATE] = self.SUSCEPTIBLE
         for (n, m, data) in self.edges_iter(data = True):
             data[self.OCCUPIED] = False
         self._edges = self.edges()
@@ -545,6 +550,7 @@ class SEIDRSynchronousDynamics(GraphWithSynchronousDynamics):
         
         # add parameters and metrics for this simulation run
         rc['pInfected' ] = self._pInfected,
+	rc['pExposed'] = self._pExposed,
         rc['gamma'] = self._gamma,
         rc['beta'] = self._beta,
         rc['delta'] = self._delta,
@@ -660,17 +666,18 @@ def show_changes(G, syn_dyn):
 
 # In[8]:
 
-delta = 0.25
-epsilon = 0.3
-zeta = 0.1
+delta = 0.539
+epsilon = 0.2
+zeta = 0.5
 household_size =5
 community_size = 10
 number_of_communities = 100
 # syn = SEIDRSynchronousDynamics(household_size, community_size, number_of_communities, pInfected = 0.01,
 #                                           beta = 0.128, gamma = 0.01038, eta = 0.01, 
 #                                           delta =delta, epsilon = epsilon, zeta = zeta)
-syn = SEIDRSynchronousDynamics(pInfected = 0.01,
-                                          beta = 0.128, gamma = 0.01038, eta = 0.01, 
+# we do  not distinguish between suspected and probable cases, so take the average
+syn = SEIDRSynchronousDynamics(pInfected = 0.00136557, pExposed = 0.0,
+                                          beta = 0.1151, gamma = 0.06851662, eta = 0.083333, 
                                           delta =delta, epsilon = epsilon, zeta = zeta, g = nx.erdos_renyi_graph(5000, 0.01), rewire_degree=0.5)
 syn_dyn = syn.dynamics()
 
@@ -680,12 +687,13 @@ syn_dyn = syn.dynamics()
 import io
 import os
 SEPARATOR = ', '
-if os.path.isfile('experiment1.csv'):
-    file = open('experiment1.csv', 'a')
+file_num = 3
+if os.path.isfile('experiment'+str(file_num)+'.csv'):
+    file = open('experiment'+str(file_num)+'.csv', 'a')
 else:
-    file = open('experiment1.csv', 'w')
-file.write('pInfected, gamma, beta, delta, epsilon, zeta, eta, N, elapsed_time, timesteps, events, timesteps_with_events,')
-file.write('mean_outbreak_size, max_outbreak_size, max_outbreak_proportion, exposed_from_infected, exposed_from_dead, rewire_degree\n')
+    file = open('experiment'+str(file_num)+'.csv', 'w')
+#file.write('pInfected, gamma, beta, delta, epsilon, zeta, eta, N, elapsed_time, timesteps, events, timesteps_with_events,')
+#file.write('mean_outbreak_size, max_outbreak_size, max_outbreak_proportion, exposed_from_infected, exposed_from_dead, rewire_degree\n')
 file.write(str(syn_dyn['pInfected' ][0]) + SEPARATOR + str(syn_dyn['gamma'][0]) + SEPARATOR + str(syn_dyn['beta'][0])+ 
            SEPARATOR + str(syn_dyn['delta'][0]) + SEPARATOR + str(syn_dyn['epsilon'][0]) + SEPARATOR + str(syn_dyn['zeta'][0]) + 
            SEPARATOR + str(syn_dyn['eta'][0]) + SEPARATOR + str(syn_dyn['N'][0]) + SEPARATOR + str(syn_dyn['elapsed_time'])+ 
@@ -695,10 +703,10 @@ file.write(str(syn_dyn['pInfected' ][0]) + SEPARATOR + str(syn_dyn['gamma'][0]) 
            SEPARATOR + str(syn_dyn['exposed_from_dead']) + SEPARATOR + str(syn_dyn['rewire_degree'][0])+'\n')
 file.close()
 
-if os.path.isfile('experiment1_1.csv'):
-    file1 = open('experiment1_1.csv', 'a')
+if os.path.isfile('experiment'+str(file_num)+'_1.csv'):
+    file1 = open('eexperiment'+str(file_num)+'_1.csv', 'a')
 else:
-    file1 = open('experiment1_1.csv', 'w')
+    file1 = open('experiment'+str(file_num)+'_1.csv', 'w')
 event_distr = syn_dyn['event_distribution']
 timesteps = ''
 events = ''

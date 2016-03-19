@@ -1,24 +1,6 @@
 pInfected, gamma, beta, delta, epsilon, zeta, eta, N, elapsed_time, timesteps, events, timesteps_with_events,mean_outbreak_size, max_outbreak_size, max_outbreak_proportion, exposed_from_infected, exposed_from_dead, rewire_degree
-0.01, 0.01038, 0.128, 0.25, 0.3, 0.3, 0.01, 1000, 4.536237, 949, 3693, 533, 100.0, 256, 0.256, 875, 115, 1
+0.01, 0.01038, 0.128, 0.25, 0.3, 0.1, 0.01, 500, 0.590705, 972, 1821, 537, 62.5, 202, 0.404, 424, 68, 0.5
 pInfected, gamma, beta, delta, epsilon, zeta, eta, N, elapsed_time, timesteps, events, timesteps_with_events,mean_outbreak_size, max_outbreak_size, max_outbreak_proportion, exposed_from_infected, exposed_from_dead, rewire_degree
-0.01, 0.01038, 0.128, 0.25, 0.3, 0.3, 0.01, 1000, 4.536237, 949, 3693, 533, 100.0, 256, 0.256, 875, 115, 1
+0.01, 0.01038, 0.128, 0.25, 0.3, 0.1, 0.01, 500, 0.596002, 962, 1840, 523, 83.3333333333, 171, 0.342, 439, 55, 0.5
 pInfected, gamma, beta, delta, epsilon, zeta, eta, N, elapsed_time, timesteps, events, timesteps_with_events,mean_outbreak_size, max_outbreak_size, max_outbreak_proportion, exposed_from_infected, exposed_from_dead, rewire_degree
-0.01, 0.01038, 0.128, 0.25, 0.3, 0.3, 0.01, 1000, 4.536237, 949, 3693, 533, 100.0, 256, 0.256, 875, 115, 1
-pInfected, gamma, beta, delta, epsilon, zeta, eta, N, elapsed_time, timesteps, events, timesteps_with_events,mean_outbreak_size, max_outbreak_size, max_outbreak_proportion, exposed_from_infected, exposed_from_dead, rewire_degree
-0.01, 0.01038, 0.128, 0.25, 0.3, 0.3, 0.01, 1000, 4.536237, 949, 3693, 533, 100.0, 256, 0.256, 875, 115, 1
-pInfected, gamma, beta, delta, epsilon, zeta, eta, N, elapsed_time, timesteps, events, timesteps_with_events,mean_outbreak_size, max_outbreak_size, max_outbreak_proportion, exposed_from_infected, exposed_from_dead, rewire_degree
-0.01, 0.01038, 0.128, 0.25, 0.3, 0.3, 0.01, 1000, 4.536237, 949, 3693, 533, 100.0, 256, 0.256, 875, 115, 1
-pInfected, gamma, beta, delta, epsilon, zeta, eta, N, elapsed_time, timesteps, events, timesteps_with_events,mean_outbreak_size, max_outbreak_size, max_outbreak_proportion, exposed_from_infected, exposed_from_dead, rewire_degree
-0.01, 0.01038, 0.128, 0.25, 0.3, 0.3, 0.01, 1000, 4.536237, 949, 3693, 533, 100.0, 256, 0.256, 875, 115, 1
-pInfected, gamma, beta, delta, epsilon, zeta, eta, N, elapsed_time, timesteps, events, timesteps_with_events,mean_outbreak_size, max_outbreak_size, max_outbreak_proportion, exposed_from_infected, exposed_from_dead, rewire_degree
-0.01, 0.01038, 0.128, 0.25, 0.3, 0.3, 0.01, 1000, 4.536237, 949, 3693, 533, 100.0, 256, 0.256, 875, 115, 1
-pInfected, gamma, beta, delta, epsilon, zeta, eta, N, elapsed_time, timesteps, events, timesteps_with_events,mean_outbreak_size, max_outbreak_size, max_outbreak_proportion, exposed_from_infected, exposed_from_dead, rewire_degree
-0.01, 0.01038, 0.128, 0.25, 0.3, 0.3, 0.01, 1000, 4.536237, 949, 3693, 533, 100.0, 256, 0.256, 875, 115, 1
-pInfected, gamma, beta, delta, epsilon, zeta, eta, N, elapsed_time, timesteps, events, timesteps_with_events,mean_outbreak_size, max_outbreak_size, max_outbreak_proportion, exposed_from_infected, exposed_from_dead, rewire_degree
-0.01, 0.01038, 0.128, 0.25, 0.3, 0.3, 0.01, 1000, 4.536237, 949, 3693, 533, 100.0, 256, 0.256, 875, 115, 1
-pInfected, gamma, beta, delta, epsilon, zeta, eta, N, elapsed_time, timesteps, events, timesteps_with_events,mean_outbreak_size, max_outbreak_size, max_outbreak_proportion, exposed_from_infected, exposed_from_dead, rewire_degree
-0.01, 0.01038, 0.128, 0.25, 0.3, 0.3, 0.01, 1000, 4.536237, 949, 3693, 533, 100.0, 256, 0.256, 875, 115, 1
-pInfected, gamma, beta, delta, epsilon, zeta, eta, N, elapsed_time, timesteps, events, timesteps_with_events,mean_outbreak_size, max_outbreak_size, max_outbreak_proportion, exposed_from_infected, exposed_from_dead, rewire_degree
-0.01, 0.01038, 0.128, 0.25, 0.3, 0.3, 0.01, 1000, 4.536237, 949, 3693, 533, 100.0, 256, 0.256, 875, 115, 1
-pInfected, gamma, beta, delta, epsilon, zeta, eta, N, elapsed_time, timesteps, events, timesteps_with_events,mean_outbreak_size, max_outbreak_size, max_outbreak_proportion, exposed_from_infected, exposed_from_dead, rewire_degree
-0.01, 0.01038, 0.128, 0.25, 0.3, 0.3, 0.01, 1000, 4.536237, 949, 3693, 533, 100.0, 256, 0.256, 875, 115, 1
+0.01, 0.01038, 0.128, 0.25, 0.3, 0.1, 0.01, 500, 0.590252, 881, 1813, 524, 71.4285714286, 194, 0.388, 447, 46, 0.5

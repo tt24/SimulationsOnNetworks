@@ -1,0 +1,12 @@
+import java.io.IOException;
+
+public class Main {
+	public static void main(String[] args) throws IOException, InterruptedException {
+		int numOfExecutions = 50;
+		for (int n = 0; n < numOfExecutions; n++) {
+			Runtime rt = Runtime.getRuntime();
+			Process pr = rt.exec("../../Year4/Constra"+ n + ".param -run-solver -O0");
+			System.out.println(pr.waitFor());
+		}
+	}
+}
