@@ -666,19 +666,21 @@ def show_changes(G, syn_dyn):
 
 # In[8]:
 
-delta = 0.339
+delta = 0.589
 epsilon = 0.2
 zeta = 0.5
 household_size =5
 community_size = 10
 number_of_communities = 100
+number_of_nodes = 5000
+p_edge_creation = 0.002
 # syn = SEIDRSynchronousDynamics(household_size, community_size, number_of_communities, pInfected = 0.01,
 #                                           beta = 0.128, gamma = 0.01038, eta = 0.01, 
 #                                           delta =delta, epsilon = epsilon, zeta = zeta)
 # we do  not distinguish between suspected and probable cases, so take the average
 syn = SEIDRSynchronousDynamics(pInfected = 0.00136557, pExposed = 0.0,
                                           beta = 0.1151, gamma = 0.06851662, eta = 0.083333, 
-                                          delta =delta, epsilon = epsilon, zeta = zeta, g = nx.erdos_renyi_graph(5000, 0.01), rewire_degree=0.5)
+                                          delta =delta, epsilon = epsilon, zeta = zeta, g = nx.erdos_renyi_graph(number_of_nodes, p_edge_creation), rewire_degree=0.25)
 syn_dyn = syn.dynamics()
 
 
@@ -687,14 +689,14 @@ syn_dyn = syn.dynamics()
 import io
 import os
 SEPARATOR = ', '
-file_num = 8
+file_num = 3
 if os.path.isfile('experiment'+str(file_num)+'.csv'):
     file = open('experiment'+str(file_num)+'.csv', 'a')
 else:
     file = open('experiment'+str(file_num)+'.csv', 'w')
-#file.write('pInfected, gamma, beta, delta, epsilon, zeta, eta, N, elapsed_time, timesteps, events, timesteps_with_events,')
+#file.write('p_edge_creation, p_infected, gamma, beta, delta, epsilon, zeta, eta, N, elapsed_time, timesteps, events, timesteps_with_events,')
 #file.write('mean_outbreak_size, max_outbreak_size, max_outbreak_proportion, exposed_from_infected, exposed_from_dead, rewire_degree\n')
-file.write(str(syn_dyn['pInfected' ][0]) + SEPARATOR + str(syn_dyn['gamma'][0]) + SEPARATOR + str(syn_dyn['beta'][0])+ 
+file.write(str(p_edge_creation)+ SEPARATOR+str(syn_dyn['pInfected' ][0]) + SEPARATOR + str(syn_dyn['gamma'][0]) + SEPARATOR + str(syn_dyn['beta'][0])+ 
            SEPARATOR + str(syn_dyn['delta'][0]) + SEPARATOR + str(syn_dyn['epsilon'][0]) + SEPARATOR + str(syn_dyn['zeta'][0]) + 
            SEPARATOR + str(syn_dyn['eta'][0]) + SEPARATOR + str(syn_dyn['N'][0]) + SEPARATOR + str(syn_dyn['elapsed_time'])+ 
            SEPARATOR + str(syn_dyn['timesteps']) + SEPARATOR + str(syn_dyn['events']) + SEPARATOR + str(syn_dyn['timesteps_with_events']) +
