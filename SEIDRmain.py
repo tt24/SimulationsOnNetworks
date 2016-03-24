@@ -662,7 +662,7 @@ def show_changes(G, syn_dyn):
 
 # In[8]:
 
-delta = 0.389
+delta = 0.589
 epsilon = 0.2
 zeta = 0.5
 household_size =5
@@ -676,7 +676,7 @@ p_edge_creation = 0.002
 # we do  not distinguish between suspected and probable cases, so take the average
 syn = SEIDRSynchronousDynamics(pInfected = 0.00136557, pExposed = 0.0,
                                           beta = 0.1151, gamma = 0.06851662, eta = 0.083333, 
-                                          delta =delta, epsilon = epsilon, zeta = zeta, g = nx.erdos_renyi_graph(number_of_nodes, p_edge_creation), rewire_degree=0.0)
+                                          delta =delta, epsilon = epsilon, zeta = zeta, g = nx.erdos_renyi_graph(number_of_nodes, p_edge_creation), rewire_degree=0.15)
 syn_dyn = syn.dynamics()
 
 
@@ -685,7 +685,7 @@ syn_dyn = syn.dynamics()
 import io
 import os
 SEPARATOR = ', '
-file_num = 10
+file_num = 16
 if os.path.isfile('experiment'+str(file_num)+'.csv'):
     file = open('experiment'+str(file_num)+'.csv', 'a')
 else:
