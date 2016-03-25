@@ -1,0 +1,1 @@
+data <- read.csv("../ExperimentRunner/src/experiment1.csv", header=TRUE)
