@@ -675,8 +675,8 @@ p_edge_creation = 0.002
 #                                           delta =delta, epsilon = epsilon, zeta = zeta)
 # we do  not distinguish between suspected and probable cases, so take the average
 syn = SEIDRSynchronousDynamics(pInfected = 0.00136557, pExposed = 0.0,
-                                          beta = 0.1151, gamma = 0.06851662, eta = 0.083333, 
-                                          delta =delta, epsilon = epsilon, zeta = zeta, g = nx.erdos_renyi_graph(number_of_nodes, p_edge_creation), rewire_degree=0.15)
+                                          beta = 0.2151, gamma = 0.06851662, eta = 0.083333, 
+                                          delta =delta, epsilon = epsilon, zeta = zeta, g = nx.erdos_renyi_graph(number_of_nodes, p_edge_creation), rewire_degree=0.35)
 syn_dyn = syn.dynamics()
 
 
@@ -686,10 +686,11 @@ import io
 import os
 SEPARATOR = ', '
 file_num = 16
-if os.path.isfile('experiment'+str(file_num)+'.csv'):
-    file = open('experiment'+str(file_num)+'.csv', 'a')
+version_num ='1'
+if os.path.isfile('experiment-beta'+str(file_num)+'.'+version_num+'.csv'):
+    file = open('experiment-beta'+str(file_num)+'.'+version_num+'.csv', 'a')
 else:
-    file = open('experiment'+str(file_num)+'.csv', 'w')
+    file = open('experiment-beta'+str(file_num)+'.'+version_num+'.csv', 'w')
 #file.write('p_edge_creation, p_infected, gamma, beta, delta, epsilon, zeta, eta, N, elapsed_time, timesteps, events, timesteps_with_events,')
 #file.write('mean_outbreak_size, max_outbreak_size, max_outbreak_proportion, exposed_from_infected, exposed_from_dead, rewire_degree\n')
 file.write(str(p_edge_creation)+ SEPARATOR+str(syn_dyn['pInfected' ][0]) + SEPARATOR + str(syn_dyn['gamma'][0]) + SEPARATOR + str(syn_dyn['beta'][0])+ 
@@ -701,10 +702,10 @@ file.write(str(p_edge_creation)+ SEPARATOR+str(syn_dyn['pInfected' ][0]) + SEPAR
            SEPARATOR + str(syn_dyn['exposed_from_dead']) + SEPARATOR + str(syn_dyn['rewire_degree'][0])+'\n')
 file.close()
 
-if os.path.isfile('experiment'+str(file_num)+'_1.csv'):
-    file1 = open('experiment'+str(file_num)+'_1.csv', 'a')
+if os.path.isfile('experiment-beta'+str(file_num)+'_'+version_num+'_1.csv'):
+    file1 = open('experiment-beta'+str(file_num)+'_'+version_num+'_1.csv', 'a')
 else:
-    file1 = open('experiment'+str(file_num)+'_1.csv', 'w')
+    file1 = open('experiment-beta'+str(file_num)+'_'+version_num+'_1.csv', 'w')
 event_distr = syn_dyn['event_distribution']
 timesteps = ''
 events = ''
