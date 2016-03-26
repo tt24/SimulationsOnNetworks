@@ -662,7 +662,7 @@ def show_changes(G, syn_dyn):
 
 # In[8]:
 
-delta = 0.589
+delta = 0.389
 epsilon = 0.2
 zeta = 0.5
 household_size =5
@@ -685,7 +685,7 @@ syn_dyn = syn.dynamics()
 import io
 import os
 SEPARATOR = ', '
-file_num = 16
+file_num = 14
 version_num ='1'
 if os.path.isfile('experiment-beta'+str(file_num)+'.'+version_num+'.csv'):
     file = open('experiment-beta'+str(file_num)+'.'+version_num+'.csv', 'a')
