@@ -681,7 +681,7 @@ syn_dyn = syn.dynamics()
 import io
 import os
 SEPARATOR = ', '
-file_num = float(args[4])
+file_num = int(args[4])
 version_num =args[5]
 if os.path.isfile('experiment-beta'+str(file_num)+'.'+version_num+'.csv'):
     file = open('experiment-beta'+str(file_num)+'.'+version_num+'.csv', 'a')
