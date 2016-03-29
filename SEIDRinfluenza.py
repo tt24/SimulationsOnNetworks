@@ -1,3 +1,4 @@
+
 # coding: utf-8
 
 # In[1]:
@@ -157,6 +158,7 @@ class GraphWithDynamics(HCgraph):
     
     def _dynamics( self ):
         '''Internal function defining the way the dynamics works.
+
         returns: a dict of properties'''
         raise NotYetImplementedError('_dynamics()')
         
@@ -322,7 +324,7 @@ class SEIDRSynchronousDynamics(GraphWithSynchronousDynamics):
         self._beta = beta
         self._gamma = gamma
         self._pInfected = pInfected
-	self._pExposed = pExposed
+    self._pExposed = pExposed
         self._eta = eta
         self._delta = delta
         self._epsilon = epsilon
@@ -431,6 +433,7 @@ class SEIDRSynchronousDynamics(GraphWithSynchronousDynamics):
     def model1( self, n ):
         '''Apply the SEIR dynamics to node n. From the re-definition of _dynamics_step()
         we already know this node is dead.
+
         n: the node
         returns: the number of changes made'''
         events = 0
@@ -461,6 +464,7 @@ class SEIDRSynchronousDynamics(GraphWithSynchronousDynamics):
     def model( self, n ):
         '''Apply the SEIR dynamics to node n. From the re-definition of _dynamics_step()
         we already know this node is infected.
+
         n: the node
         returns: the number of changes made'''
         events = 0
@@ -501,6 +505,7 @@ class SEIDRSynchronousDynamics(GraphWithSynchronousDynamics):
     def end_latent( self, n ):
         '''Apply the SEIR dynamics to node n. From the re-definition of _dynamics_step()
         we already know this node is exposed.
+
         n: the node
         returns: the number of changes made'''
         events = 0
@@ -541,7 +546,7 @@ class SEIDRSynchronousDynamics(GraphWithSynchronousDynamics):
         
         # add parameters and metrics for this simulation run
         rc['pInfected' ] = self._pInfected,
-	rc['pExposed'] = self._pExposed,
+    rc['pExposed'] = self._pExposed,
         rc['gamma'] = self._gamma,
         rc['beta'] = self._beta,
         rc['delta'] = self._delta,
@@ -656,9 +661,8 @@ def show_changes(G, syn_dyn):
 
 
 # In[8]:
-import sys
-args = sys.argv
-delta = float(args[1])
+
+delta = 0.389
 epsilon = 0.2
 zeta = 0.5
 household_size =5
@@ -671,8 +675,8 @@ p_edge_creation = 0.002
 #                                           delta =delta, epsilon = epsilon, zeta = zeta)
 # we do  not distinguish between suspected and probable cases, so take the average
 syn = SEIDRSynchronousDynamics(pInfected = 0.00136557, pExposed = 0.0,
-                                          beta = float(args[2]), gamma = 0.06851662, eta = 0.083333, 
-                                          delta =delta, epsilon = epsilon, zeta = zeta, g = nx.erdos_renyi_graph(number_of_nodes, p_edge_creation), rewire_degree=float(args[3]))
+                                          beta = 0.3151, gamma = 0.06851662, eta = 0.083333, 
+                                          delta =delta, epsilon = epsilon, zeta = zeta, g = nx.erdos_renyi_graph(number_of_nodes, p_edge_creation), rewire_degree=0.25)
 syn_dyn = syn.dynamics()
 
 
@@ -681,12 +685,13 @@ syn_dyn = syn.dynamics()
 import io
 import os
 SEPARATOR = ', '
-file_num = int(args[4])
-version_num =args[5]
-if os.path.isfile('experiment-beta'+str(file_num)+'.'+version_num+'.csv'):
-    file = open('experiment-beta'+str(file_num)+'.'+version_num+'.csv', 'a')
+file_num = 10
+version_num ='2'
+file_name = 'experiment-influenza'
+if os.path.isfile(file_name+str(file_num)+'.'+version_num+'.csv'):
+    file = open(file_name+str(file_num)+'.'+version_num+'.csv', 'a')
 else:
-    file = open('experiment-beta'+str(file_num)+'.'+version_num+'.csv', 'w')
+    file = open(file_name+str(file_num)+'.'+version_num+'.csv', 'w')
 #file.write('p_edge_creation, p_infected, gamma, beta, delta, epsilon, zeta, eta, N, elapsed_time, timesteps, events, timesteps_with_events,')
 #file.write('mean_outbreak_size, max_outbreak_size, max_outbreak_proportion, exposed_from_infected, exposed_from_dead, rewire_degree\n')
 file.write(str(p_edge_creation)+ SEPARATOR+str(syn_dyn['pInfected' ][0]) + SEPARATOR + str(syn_dyn['gamma'][0]) + SEPARATOR + str(syn_dyn['beta'][0])+ 
@@ -698,10 +703,11 @@ file.write(str(p_edge_creation)+ SEPARATOR+str(syn_dyn['pInfected' ][0]) + SEPAR
            SEPARATOR + str(syn_dyn['exposed_from_dead']) + SEPARATOR + str(syn_dyn['rewire_degree'][0])+'\n')
 file.close()
 
-if os.path.isfile('experiment-beta'+str(file_num)+'_'+version_num+'_1.csv'):
-    file1 = open('experiment-beta'+str(file_num)+'_'+version_num+'_1.csv', 'a')
+if os.path.isfile(file_name+str(file_num)+'_'+version_num+'_1.csv'):
+    file1 = open(file_name+str(file_num)+'_'+version_num+'_1.csv', 'a')
 else:
-    file1 = open('experiment-beta'+str(file_num)+'_'+version_num+'_1.csv', 'w')
+    file1 = open(file_name+str(file_num)+'_'+version_num+'_1.csv', 'w')
+
 event_distr = syn_dyn['event_distribution']
 timesteps = ''
 events = ''
@@ -789,3 +795,6 @@ file1.close()
 
 
 # In[ ]:
+
+
+
