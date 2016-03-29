@@ -1,4 +1,3 @@
-
 # coding: utf-8
 
 # In[1]:
@@ -158,7 +157,6 @@ class GraphWithDynamics(HCgraph):
     
     def _dynamics( self ):
         '''Internal function defining the way the dynamics works.
-
         returns: a dict of properties'''
         raise NotYetImplementedError('_dynamics()')
         
@@ -324,7 +322,7 @@ class SEIDRSynchronousDynamics(GraphWithSynchronousDynamics):
         self._beta = beta
         self._gamma = gamma
         self._pInfected = pInfected
-    self._pExposed = pExposed
+	self._pExposed = pExposed
         self._eta = eta
         self._delta = delta
         self._epsilon = epsilon
@@ -433,7 +431,6 @@ class SEIDRSynchronousDynamics(GraphWithSynchronousDynamics):
     def model1( self, n ):
         '''Apply the SEIR dynamics to node n. From the re-definition of _dynamics_step()
         we already know this node is dead.
-
         n: the node
         returns: the number of changes made'''
         events = 0
@@ -464,7 +461,6 @@ class SEIDRSynchronousDynamics(GraphWithSynchronousDynamics):
     def model( self, n ):
         '''Apply the SEIR dynamics to node n. From the re-definition of _dynamics_step()
         we already know this node is infected.
-
         n: the node
         returns: the number of changes made'''
         events = 0
@@ -505,7 +501,6 @@ class SEIDRSynchronousDynamics(GraphWithSynchronousDynamics):
     def end_latent( self, n ):
         '''Apply the SEIR dynamics to node n. From the re-definition of _dynamics_step()
         we already know this node is exposed.
-
         n: the node
         returns: the number of changes made'''
         events = 0
@@ -546,7 +541,7 @@ class SEIDRSynchronousDynamics(GraphWithSynchronousDynamics):
         
         # add parameters and metrics for this simulation run
         rc['pInfected' ] = self._pInfected,
-    rc['pExposed'] = self._pExposed,
+	rc['pExposed'] = self._pExposed,
         rc['gamma'] = self._gamma,
         rc['beta'] = self._beta,
         rc['delta'] = self._delta,
@@ -662,7 +657,7 @@ def show_changes(G, syn_dyn):
 
 # In[8]:
 
-delta = 0.389
+delta = 0.289
 epsilon = 0.2
 zeta = 0.5
 household_size =5
@@ -685,7 +680,7 @@ syn_dyn = syn.dynamics()
 import io
 import os
 SEPARATOR = ', '
-file_num = 10
+file_num = 9
 version_num ='2'
 if os.path.isfile('experiment-beta'+str(file_num)+'.'+version_num+'.csv'):
     file = open('experiment-beta'+str(file_num)+'.'+version_num+'.csv', 'a')
@@ -793,6 +788,3 @@ file1.close()
 
 
 # In[ ]:
-
-
-
