@@ -11,8 +11,8 @@ public class Main {
 		while(rewire>=0.0) {
 			double delta = 0.589;
 			while(delta>=0.289) {
-				System.out.println("python ../../SEIDRmain.py " +df.format(delta)+" "+beta+" "+rewire+" "+fileNum+ " "+verNum);
-				BufferedWriter bw = new BufferedWriter(new FileWriter(new File("experiment-beta"+fileNum+"."+verNum+".csv")));
+				System.out.println("python ../../SEIDRmain2.py " +df.format(delta)+" "+beta+" "+rewire+" "+fileNum+ " "+verNum);
+				BufferedWriter bw = new BufferedWriter(new FileWriter(new File("hcg-experiment"+fileNum+"."+verNum+".csv")));
 		//		BufferedWriter bw = new BufferedWriter(new FileWriter(new File("experiment-beta9.2.csv")));
 				bw.write("p_edge_creation,p_infected,gamma,beta,delta,epsilon,zeta,eta,N,elapsed_time,timesteps,events,timesteps_with_events,mean_outbreak_size,max_outbreak_size,max_outbreak_proportion,exposed_from_infected,exposed_from_dead,rewire_degree\n");
 		//		bw.write("p_edge_creation,p_infected,gamma,beta,eta,N,elapsed_time,timesteps,events,timesteps_with_events,mean_outbreak_size,max_outbreak_size,max_outbreak_proportion,exposed_from_infected\n");
