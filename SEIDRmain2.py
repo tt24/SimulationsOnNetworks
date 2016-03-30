@@ -81,7 +81,7 @@ class HCgraph(nx.Graph):
         num_of_nodes = len(self.nodes())
         if s_to>num_of_nodes:
             s_to = s_to-num_of_nodes
-        intervals[0] = [s_from, s_to]
+        intervals[0] = [0, s_to]
         if household_number%(self._community_size-1)==0:
             if s_comm==0:
                 s_from1 = num_of_nodes-self._household_size
@@ -356,11 +356,9 @@ class SEIDRSynchronousDynamics(GraphWithSynchronousDynamics):
         
     def rewire(self, start_node, end_node, dead_node):
         nodes_num = self.order()
-        print nodes_num
         num = int(self._rewire_degree*nodes_num/100)
         for i in range(0, num):
             random_node = randint(start_node, end_node)
-            print random_node
             if (dead_node, random_node) not in self._edges and (random_node, dead_node) not in self._edges and dead_node !=random_node and self.node[random_node][self.DYNAMICAL_STATE] != self.REMOVED:
                 self.add_edge(dead_node, random_node)
                 self._edges.insert(0, (dead_node, random_node))
