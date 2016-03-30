@@ -8,6 +8,7 @@ public class Main {
 		int verNum = 2;
 		double rewire = 0.15;
 		double beta = 0.3151;
+		String name = "hcg-experiment"
 		while(rewire>=0.0) {
 			double delta = 0.589;
 			while(delta>=0.289) {
@@ -19,7 +20,7 @@ public class Main {
 				bw.close();
 				for (int n = 0; n < numOfExecutions; n++) {
 					Runtime rt = Runtime.getRuntime();
-					Process pr = rt.exec("python ../../SEIDRmain.py " +df.format(delta)+" "+beta+" "+rewire+" "+fileNum+ " "+verNum);
+					Process pr = rt.exec("python ../../SEIDRmain2.py " +df.format(delta)+" "+beta+" "+rewire+" "+fileNum+ " "+verNum+ " "+ name);
 		//			Process pr = rt.exec("python ../../SEIRinfluenza.py");
 					System.out.println(pr.waitFor());
 				}

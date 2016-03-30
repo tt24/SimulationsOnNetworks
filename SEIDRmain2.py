@@ -676,6 +676,7 @@ syn = SEIDRSynchronousDynamics(household_size, community_size, number_of_communi
 # syn = SEIDRSynchronousDynamics(pInfected = 0.00136557, pExposed = 0.0,
 #                                           beta = float(args[2]), gamma = 0.06851662, eta = 0.083333, 
 #                                           delta =delta, epsilon = epsilon, zeta = zeta, g = nx.erdos_renyi_graph(number_of_nodes, p_edge_creation), rewire_degree=float(args[3]))
+number_of_nodes = syn.order()
 syn_dyn = syn.dynamics()
 
 
@@ -686,7 +687,7 @@ import os
 SEPARATOR = ', '
 file_num = int(args[4])
 version_num =args[5]
-file_name = 'hcg-experiment'
+file_name = args[6]
 if os.path.isfile(file_name+str(file_num)+'.'+version_num+'.csv'):
     file = open(file_name+str(file_num)+'.'+version_num+'.csv', 'a')
 else:
