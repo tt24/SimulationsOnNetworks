@@ -544,7 +544,7 @@ class SEIDRSynchronousDynamics(GraphWithSynchronousDynamics):
         
         # add parameters and metrics for this simulation run
         rc['pInfected' ] = self._pInfected,
-    rc['pExposed'] = self._pExposed,
+        rc['pExposed'] = self._pExposed,
         rc['gamma'] = self._gamma,
         rc['beta'] = self._beta,
         rc['delta'] = self._delta,
