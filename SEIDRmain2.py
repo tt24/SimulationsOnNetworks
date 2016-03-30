@@ -322,7 +322,7 @@ class SEIDRSynchronousDynamics(GraphWithSynchronousDynamics):
         self._beta = beta
         self._gamma = gamma
         self._pInfected = pInfected
-    self._pExposed = pExposed
+        self._pExposed = pExposed
         self._eta = eta
         self._delta = delta
         self._epsilon = epsilon
