@@ -8,7 +8,7 @@ public class Main {
 		int verNum = 2;
 		double rewire = 0.15;
 		double beta = 0.3151;
-		String name = "hcg-experiment"
+		String name = "hcg-experiment";
 		while(rewire>=0.0) {
 			double delta = 0.589;
 			while(delta>=0.289) {
