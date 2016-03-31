@@ -545,7 +545,7 @@ p_edge_creation = 0.002
 #                                           beta = 0.128, gamma = 0.01038, eta = 0.01, 
 #                                           delta =delta, epsilon = epsilon, zeta = zeta)
 syn = SEIRSynchronousDynamics(pInfected = 0.00136557,
-                                          beta = 0.1151, gamma = 0.06851662, eta = 0.083333, 
+                                          beta = 0.3151, gamma = 0.06851662, eta = 0.083333, 
                                           g = nx.erdos_renyi_graph(number_of_nodes, p_edge_creation))
 syn_dyn = syn.dynamics()
 
@@ -562,7 +562,7 @@ else:
     file = open('seir-experiment'+str(file_num)+'.csv', 'w')
 #file.write('p_edge_creation, p_infected, gamma, beta, delta, epsilon, zeta, eta, N, elapsed_time, timesteps, events, timesteps_with_events,')
 #file.write('mean_outbreak_size, max_outbreak_size, max_outbreak_proportion, exposed_from_infected, exposed_from_dead, rewire_degree\n')
-file.write(str(syn_dyn['pInfected' ][0]) + SEPARATOR + str(syn_dyn['gamma'][0]) + SEPARATOR + str(syn_dyn['beta'][0])+ 
+file.write(str(p_edge_creation)+ SEPARATOR + str(syn_dyn['pInfected' ][0]) + SEPARATOR + str(syn_dyn['gamma'][0]) + SEPARATOR + str(syn_dyn['beta'][0])+ 
            SEPARATOR + str(syn_dyn['eta'][0]) + SEPARATOR + str(syn_dyn['N'][0]) + SEPARATOR + str(syn_dyn['elapsed_time'])+ 
            SEPARATOR + str(syn_dyn['timesteps']) + SEPARATOR + str(syn_dyn['events']) + SEPARATOR + str(syn_dyn['timesteps_with_events']) +
            SEPARATOR + str(syn_dyn['mean_outbreak_size'][0]) + SEPARATOR + str(syn_dyn['max_outbreak_size'][0]) + 

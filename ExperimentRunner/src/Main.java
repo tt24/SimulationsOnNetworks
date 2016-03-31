@@ -8,12 +8,12 @@ public class Main {
 		int verNum = 2;
 		double rewire = 0.25;
 		double beta = 0.3151;
-		String name = "hcg-experiment";
+		String name = "new/hcg-experiment";
 		while(rewire>=0.25) {
 			double delta = 0.589;
 			while(delta>=0.289) {
 				System.out.println("python ../../SEIDRmain2.py " +df.format(delta)+" "+beta+" "+rewire+" "+fileNum+ " "+verNum + " "+name);
-				BufferedWriter bw = new BufferedWriter(new FileWriter(new File("hcg-experiment"+fileNum+"."+verNum+".csv")));
+				BufferedWriter bw = new BufferedWriter(new FileWriter(new File(name+fileNum+"."+verNum+".csv")));
 		//		BufferedWriter bw = new BufferedWriter(new FileWriter(new File("experiment-beta9.2.csv")));
 				bw.write("p_edge_creation,p_infected,gamma,beta,delta,epsilon,zeta,eta,N,elapsed_time,timesteps,events,timesteps_with_events,mean_outbreak_size,max_outbreak_size,max_outbreak_proportion,exposed_from_infected,exposed_from_dead,rewire_degree\n");
 		//		bw.write("p_edge_creation,p_infected,gamma,beta,eta,N,elapsed_time,timesteps,events,timesteps_with_events,mean_outbreak_size,max_outbreak_size,max_outbreak_proportion,exposed_from_infected\n");
@@ -21,7 +21,7 @@ public class Main {
 				for (int n = 0; n < numOfExecutions; n++) {
 					System.out.println(n);
 					Runtime rt = Runtime.getRuntime();
-					Process pr = rt.exec("python ../../SEIDRmain2.py " +df.format(delta)+" "+beta+" "+rewire+" "+fileNum+ " "+verNum+ " "+ name);
+					Process pr = rt.exec("python ../../SEIDRmain2.2.py " +df.format(delta)+" "+beta+" "+rewire+" "+fileNum+ " "+verNum+ " "+ name);
 		//			Process pr = rt.exec("python ../../SEIRinfluenza.py");
 					System.out.println(pr.waitFor());
 				}
