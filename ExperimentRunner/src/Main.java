@@ -4,12 +4,12 @@ public class Main {
 	public static void main(String[] args) throws IOException, InterruptedException {
 		int numOfExecutions = 50;
 		DecimalFormat df = new DecimalFormat("#.###");
-		int fileNum = 8;
+		int fileNum = 12;
 		int verNum = 2;
-		double rewire = 0.15;
+		double rewire = 0.25;
 		double beta = 0.3151;
 		String name = "hcg-experiment";
-		while(rewire>=0.0) {
+		while(rewire>=0.25) {
 			double delta = 0.589;
 			while(delta>=0.289) {
 				System.out.println("python ../../SEIDRmain2.py " +df.format(delta)+" "+beta+" "+rewire+" "+fileNum+ " "+verNum + " "+name);
@@ -28,7 +28,7 @@ public class Main {
 				delta=delta-0.1;
 				fileNum-=1;
 			}
-			rewire=rewire-0.15;
+			rewire=rewire-0.10;
 		}
 
 	}
