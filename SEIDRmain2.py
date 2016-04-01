@@ -685,13 +685,11 @@ syn_dyn = syn.dynamics()
 import io
 import os
 SEPARATOR = ', '
-file_num = int(args[4])
-version_num =args[5]
 file_name = args[6]
-if os.path.isfile(file_name+str(file_num)+'.'+version_num+'.csv'):
-    file = open(file_name+str(file_num)+'.'+version_num+'.csv', 'a')
+if os.path.isfile(file_name+'.csv'):
+    file = open(file_name+'.csv', 'a')
 else:
-    file = open(file_name+str(file_num)+'.'+version_num+'.csv', 'w')
+    file = open(file_name+'.csv', 'w')
 #file.write('p_edge_creation, p_infected, gamma, beta, delta, epsilon, zeta, eta, N, elapsed_time, timesteps, events, timesteps_with_events,')
 #file.write('mean_outbreak_size, max_outbreak_size, max_outbreak_proportion, exposed_from_infected, exposed_from_dead, rewire_degree\n')
 file.write(str(p_edge_creation)+ SEPARATOR+str(syn_dyn['pInfected' ][0]) + SEPARATOR + str(syn_dyn['gamma'][0]) + SEPARATOR + str(syn_dyn['beta'][0])+ 
@@ -703,10 +701,10 @@ file.write(str(p_edge_creation)+ SEPARATOR+str(syn_dyn['pInfected' ][0]) + SEPAR
            SEPARATOR + str(syn_dyn['exposed_from_dead']) + SEPARATOR + str(syn_dyn['rewire_degree'][0])+'\n')
 file.close()
 
-if os.path.isfile(file_name+str(file_num)+'_'+version_num+'_1.csv'):
-    file1 = open(file_name+str(file_num)+'_'+version_num+'_1.csv', 'a')
+if os.path.isfile(file_name+'_1.csv'):
+    file1 = open(file_name+'_1.csv', 'a')
 else:
-    file1 = open(file_name+str(file_num)+'_'+version_num+'_1.csv', 'w')
+    file1 = open(file_name+'_1.csv', 'w')
 event_distr = syn_dyn['event_distribution']
 timesteps = ''
 events = ''
