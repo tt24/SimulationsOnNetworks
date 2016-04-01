@@ -532,21 +532,19 @@ def show_changes(G, syn_dyn):
 
 
 # In[7]:
-
-delta = 0.25
-epsilon = 0.3
-zeta = 0.1
-household_size =5
+import sys
+args = sys.argv
+beta = float(args[1])
+household_size =15
 community_size = 10
-number_of_communities = 100
+number_of_communities = 37
 number_of_nodes = 5000
 p_edge_creation = 0.002
 # syn = SEIDRSynchronousDynamics(household_size, community_size, number_of_communities, pInfected = 0.01,
 #                                           beta = 0.128, gamma = 0.01038, eta = 0.01, 
 #                                           delta =delta, epsilon = epsilon, zeta = zeta)
-syn = SEIRSynchronousDynamics(pInfected = 0.00136557,
-                                          beta = 0.3151, gamma = 0.06851662, eta = 0.083333, 
-                                          g = nx.erdos_renyi_graph(number_of_nodes, p_edge_creation))
+syn = SEIRSynchronousDynamics(household_size, community_size, number_of_communities, pInfected = 0.00136557,
+                                          beta = beta, gamma = 0.06851662, eta = 0.083333)
 syn_dyn = syn.dynamics()
 
 
@@ -555,11 +553,12 @@ syn_dyn = syn.dynamics()
 import io
 import os
 SEPARATOR = ', '
-file_num = 1
-if os.path.isfile('seir-experiment'+str(file_num)+'.csv'):
-    file = open('seir-experiment'+str(file_num)+'.csv', 'a')
+number_of_nodes = syn.order()
+filename = args[2]
+if os.path.isfile(filename+'.csv'):
+    file = open(filename+'.csv', 'a')
 else:
-    file = open('seir-experiment'+str(file_num)+'.csv', 'w')
+    file = open(filename+'.csv', 'w')
 #file.write('p_edge_creation, p_infected, gamma, beta, delta, epsilon, zeta, eta, N, elapsed_time, timesteps, events, timesteps_with_events,')
 #file.write('mean_outbreak_size, max_outbreak_size, max_outbreak_proportion, exposed_from_infected, exposed_from_dead, rewire_degree\n')
 file.write(str(p_edge_creation)+ SEPARATOR + str(syn_dyn['pInfected' ][0]) + SEPARATOR + str(syn_dyn['gamma'][0]) + SEPARATOR + str(syn_dyn['beta'][0])+ 
@@ -569,10 +568,10 @@ file.write(str(p_edge_creation)+ SEPARATOR + str(syn_dyn['pInfected' ][0]) + SEP
            SEPARATOR + str(syn_dyn['max_outbreak_proportion'])+'\n')
 file.close()
 
-if os.path.isfile('seir-experiment'+str(file_num)+'_1.csv'):
-    file1 = open('seir-experiment'+str(file_num)+'_1.csv', 'a')
+if os.path.isfile(filename+'_1.csv'):
+    file1 = open(filename+'_1.csv', 'a')
 else:
-    file1 = open('seir-experiment'+str(file_num)+'_1.csv', 'w')
+    file1 = open(filename+'_1.csv', 'w')
 event_distr = syn_dyn['event_distribution']
 changes = sorted(event_distr.keys())
 timesteps = ''

@@ -685,7 +685,7 @@ syn_dyn = syn.dynamics()
 import io
 import os
 SEPARATOR = ', '
-file_name = args[6]
+file_name = args[4]
 if os.path.isfile(file_name+'.csv'):
     file = open(file_name+'.csv', 'a')
 else:
