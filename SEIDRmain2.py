@@ -81,7 +81,7 @@ class HCgraph(nx.Graph):
         num_of_nodes = len(self.nodes())
         if s_to>num_of_nodes:
             s_to = s_to-num_of_nodes
-        intervals[0] = [s_from, s_to]
+        intervals[0] = [0, s_to]
         if household_number%(self._community_size-1)==0:
             if s_comm==0:
                 s_from1 = num_of_nodes-self._household_size
