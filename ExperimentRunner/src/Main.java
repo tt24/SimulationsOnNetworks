@@ -7,13 +7,13 @@ public class Main {
 		double[] deltas = {0.289,0.389,0.489,0.589};
 		double[] betas = {0.1151, 0.2151};
 		double[] rewires = {0.0,0.15,0.25,0.35};
-		int beta = 0;
+		int beta = 1;
 		while (beta<=1) {
-			int delta = 0;
-			while(delta<=3) {
+			int delta = 3;
+			while(delta>=2) {
 				int rewire = 0;
 				while(rewire<=3) {
-					String name = "HCgraphExperiment/beta"+beta+"/delta"+delta+"/experiment"+rewire;
+					String name = "HCgraphExperiment/temp/beta"+beta+"/delta"+delta+"/experiment"+rewire;
 					System.out.println("python ../../SEIDRmain2.py " +name+ " "+deltas[delta]+" "+betas[beta]+" "+rewires[rewire]);
 					BufferedWriter bw = new BufferedWriter(new FileWriter(new File(name+".csv")));
 			//		BufferedWriter bw = new BufferedWriter(new FileWriter(new File("experiment-beta9.2.csv")));
@@ -29,7 +29,7 @@ public class Main {
 					}
 					rewire++;
 				}
-				delta++;
+				delta--;
 			}
 			beta++;
 		}
