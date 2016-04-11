@@ -536,17 +536,16 @@ def show_changes(G, syn_dyn):
 delta = 0.25
 epsilon = 0.3
 zeta = 0.1
-household_size =5
-community_size = 10
-number_of_communities = 100
+household_size =11
+community_size = 11
+number_of_communities = 7
 number_of_nodes = 763
 p_edge_creation = 1.0
 # syn = SEIDRSynchronousDynamics(household_size, community_size, number_of_communities, pInfected = 0.01,
 #                                           beta = 0.128, gamma = 0.01038, eta = 0.01, 
 #                                           delta =delta, epsilon = epsilon, zeta = zeta)
-syn = SEIRSynchronousDynamics(pInfected = 0.13106160,
-                                          beta =0.00218, gamma = 0.44036, eta = 0.083333, 
-                                          g = nx.erdos_renyi_graph(number_of_nodes, p_edge_creation))
+syn = SEIRSynchronousDynamics(household_size, community_size, number_of_communities, pInfected = 0.13106160,
+                                          beta =0.00218, gamma = 0.44036, eta = 0.083333)
 syn_dyn = syn.dynamics()
 
 
@@ -557,7 +556,7 @@ import os
 SEPARATOR = ', '
 file_num = 1
 version_num ='1'
-file_name = 'seir-experiment-influenza'
+file_name = 'seir-experiment-influenza-hc'
 if os.path.isfile(file_name+str(file_num)+'.'+version_num+'.csv'):
     file = open(file_name+str(file_num)+'.'+version_num+'.csv', 'a')
 else:
