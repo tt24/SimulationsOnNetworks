@@ -559,8 +559,6 @@ if os.path.isfile(filename+'.csv'):
     file = open(filename+'.csv', 'a')
 else:
     file = open(filename+'.csv', 'w')
-#file.write('p_edge_creation, p_infected, gamma, beta, delta, epsilon, zeta, eta, N, elapsed_time, timesteps, events, timesteps_with_events,')
-#file.write('mean_outbreak_size, max_outbreak_size, max_outbreak_proportion, exposed_from_infected, exposed_from_dead, rewire_degree\n')
 file.write(str(p_edge_creation)+ SEPARATOR + str(syn_dyn['pInfected' ][0]) + SEPARATOR + str(syn_dyn['gamma'][0]) + SEPARATOR + str(syn_dyn['beta'][0])+ 
            SEPARATOR + str(syn_dyn['eta'][0]) + SEPARATOR + str(syn_dyn['N'][0]) + SEPARATOR + str(syn_dyn['elapsed_time'])+ 
            SEPARATOR + str(syn_dyn['timesteps']) + SEPARATOR + str(syn_dyn['events']) + SEPARATOR + str(syn_dyn['timesteps_with_events']) +

@@ -1,3 +1,0 @@
-p_edge_creation,p_infected,gamma,beta,delta,epsilon,zeta,eta,N,elapsed_time,timesteps,events,timesteps_with_events,mean_outbreak_size,max_outbreak_size,max_outbreak_proportion,exposed_from_infected,exposed_from_dead,rewire_degree
-0.002, 0.00136557, 0.06851662, 0.2151, 0.589, 0.2, 0.5, 0.083333, 5010, 181.297675, 172, 19088, 133, 715.714285714, 2623, 0.523552894212, 3349, 1654, 0.25
-0.002, 0.00136557, 0.06851662, 0.2151, 0.589, 0.2, 0.5, 0.083333, 5010, 178.426866, 162, 19036, 135, 715.714285714, 1967, 0.392614770459, 3378, 1625, 0.25

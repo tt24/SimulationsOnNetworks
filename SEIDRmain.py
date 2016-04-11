@@ -81,7 +81,7 @@ class HCgraph(nx.Graph):
         num_of_nodes = len(self.nodes())
         if s_to>num_of_nodes:
             s_to = s_to-num_of_nodes
-        intervals[0] = [s_from, s_to]
+        intervals[0] = [0, s_to]
         if household_number%(self._community_size-1)==0:
             if s_comm==0:
                 s_from1 = num_of_nodes-self._household_size
@@ -322,7 +322,7 @@ class SEIDRSynchronousDynamics(GraphWithSynchronousDynamics):
         self._beta = beta
         self._gamma = gamma
         self._pInfected = pInfected
-	self._pExposed = pExposed
+        self._pExposed = pExposed
         self._eta = eta
         self._delta = delta
         self._epsilon = epsilon
@@ -355,10 +355,13 @@ class SEIDRSynchronousDynamics(GraphWithSynchronousDynamics):
 #         self._edges = list(new_edges)
         
     def rewire(self, start_node, end_node, dead_node):
-        for i in range(start_node, end_node+1):
-            if (dead_node, i) not in self._edges and (i, dead_node) not in self._edges and dead_node !=i and self.node[i][self.DYNAMICAL_STATE] != self.REMOVED:
-                self.add_edge(dead_node, i)
-                self._edges.insert(0, (dead_node, i))
+        nodes_num = self.order()
+        num = int(self._rewire_degree*nodes_num/100)
+        for i in range(0, num):
+            random_node = randint(start_node, end_node)
+            if (dead_node, random_node) not in self._edges and (random_node, dead_node) not in self._edges and dead_node !=random_node and self.node[random_node][self.DYNAMICAL_STATE] != self.REMOVED:
+                self.add_edge(dead_node, random_node)
+                self._edges.insert(0, (dead_node, random_node))
                 
     def rewire1(self, dead_node):
         nodes_num = len(self.nodes())
@@ -541,7 +544,7 @@ class SEIDRSynchronousDynamics(GraphWithSynchronousDynamics):
         
         # add parameters and metrics for this simulation run
         rc['pInfected' ] = self._pInfected,
-	rc['pExposed'] = self._pExposed,
+        rc['pExposed'] = self._pExposed,
         rc['gamma'] = self._gamma,
         rc['beta'] = self._beta,
         rc['delta'] = self._delta,
@@ -661,18 +664,19 @@ args = sys.argv
 delta = float(args[1])
 epsilon = 0.2
 zeta = 0.5
-household_size =5
+household_size =15
 community_size = 10
-number_of_communities = 100
+number_of_communities = 37
 number_of_nodes = 5000
 p_edge_creation = 0.002
-# syn = SEIDRSynchronousDynamics(household_size, community_size, number_of_communities, pInfected = 0.01,
-#                                           beta = 0.128, gamma = 0.01038, eta = 0.01, 
-#                                           delta =delta, epsilon = epsilon, zeta = zeta)
-# we do  not distinguish between suspected and probable cases, so take the average
-syn = SEIDRSynchronousDynamics(pInfected = 0.00136557, pExposed = 0.0,
+syn = SEIDRSynchronousDynamics(household_size, community_size, number_of_communities, pInfected = 0.00136557,
                                           beta = float(args[2]), gamma = 0.06851662, eta = 0.083333, 
-                                          delta =delta, epsilon = epsilon, zeta = zeta, g = nx.erdos_renyi_graph(number_of_nodes, p_edge_creation), rewire_degree=float(args[3]))
+                                          delta =delta, epsilon = epsilon, zeta = zeta, rewire_degree=float(args[3]))
+# we do  not distinguish between suspected and probable cases, so take the average
+# syn = SEIDRSynchronousDynamics(pInfected = 0.00136557, pExposed = 0.0,
+#                                           beta = float(args[2]), gamma = 0.06851662, eta = 0.083333, 
+#                                           delta =delta, epsilon = epsilon, zeta = zeta, g = nx.erdos_renyi_graph(number_of_nodes, p_edge_creation), rewire_degree=float(args[3]))
+number_of_nodes = syn.order()
 syn_dyn = syn.dynamics()
 
 
@@ -683,10 +687,11 @@ import os
 SEPARATOR = ', '
 file_num = int(args[4])
 version_num =args[5]
-if os.path.isfile('experiment-beta'+str(file_num)+'.'+version_num+'.csv'):
-    file = open('experiment-beta'+str(file_num)+'.'+version_num+'.csv', 'a')
+file_name = args[6]
+if os.path.isfile(file_name+str(file_num)+'.'+version_num+'.csv'):
+    file = open(file_name+str(file_num)+'.'+version_num+'.csv', 'a')
 else:
-    file = open('experiment-beta'+str(file_num)+'.'+version_num+'.csv', 'w')
+    file = open(file_name+str(file_num)+'.'+version_num+'.csv', 'w')
 #file.write('p_edge_creation, p_infected, gamma, beta, delta, epsilon, zeta, eta, N, elapsed_time, timesteps, events, timesteps_with_events,')
 #file.write('mean_outbreak_size, max_outbreak_size, max_outbreak_proportion, exposed_from_infected, exposed_from_dead, rewire_degree\n')
 file.write(str(p_edge_creation)+ SEPARATOR+str(syn_dyn['pInfected' ][0]) + SEPARATOR + str(syn_dyn['gamma'][0]) + SEPARATOR + str(syn_dyn['beta'][0])+ 
@@ -698,10 +703,10 @@ file.write(str(p_edge_creation)+ SEPARATOR+str(syn_dyn['pInfected' ][0]) + SEPAR
            SEPARATOR + str(syn_dyn['exposed_from_dead']) + SEPARATOR + str(syn_dyn['rewire_degree'][0])+'\n')
 file.close()
 
-if os.path.isfile('experiment-beta'+str(file_num)+'_'+version_num+'_1.csv'):
-    file1 = open('experiment-beta'+str(file_num)+'_'+version_num+'_1.csv', 'a')
+if os.path.isfile(file_name+str(file_num)+'_'+version_num+'_1.csv'):
+    file1 = open(file_name+str(file_num)+'_'+version_num+'_1.csv', 'a')
 else:
-    file1 = open('experiment-beta'+str(file_num)+'_'+version_num+'_1.csv', 'w')
+    file1 = open(file_name+str(file_num)+'_'+version_num+'_1.csv', 'w')
 event_distr = syn_dyn['event_distribution']
 timesteps = ''
 events = ''
@@ -758,34 +763,4 @@ rem = 'rem, '+rem[:-2] + '\n'
 file1.write(timesteps+events+sus+exp+inf+dead+rec+rem)
 file1.close()
 
-# populations =  syn_dyn['populations']
-# for t in populations:
-#     s = 0
-#     e = 0
-#     i = 0
-#     d = 0
-#     r = 0
-#     for j in populations[t]:
-#         if j=='S':
-#             s = populations[t][j]
-#         else: 
-#             if j=='E':
-#                 e = populations[t][j]
-#             else:
-#                 if j=='I':
-#                     i = populations[t][j]
-#                 else:
-#                     if j=='D':
-#                         d = populations[t][j]
-#                     else:
-#                         if j=='R':
-#                             r = populations[t][j]
-#     print t, ",", s,e,i,d,r
 
-
-# In[ ]:
-
-
-
-
-# In[ ]:
